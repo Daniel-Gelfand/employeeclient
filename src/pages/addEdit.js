@@ -16,6 +16,14 @@ const AddEdit = () => {
     const [state,setState] = useState(initialState);
     const { firstName : employeeFirstName  , lastName: employeeLastName ,email: employeeEmail } = initialState;
 
+
+
+    const [filteredData,setFilteredData] = useState(state);
+    const handleSearch = (event) =>{
+    }
+
+
+
     const {email} = useParams();
 
     const navigate = useNavigate();
@@ -114,9 +122,9 @@ const AddEdit = () => {
             if (response.status == '200'){
                 toast.success("Employee Updated Successfully");
             }
-            // else {
-            //     toast.error(JSON.stringify(response.data.message));
-            // }
+            else {
+                toast.error(JSON.stringify(response.data.message));
+            }
         }
         catch (e){
             console.log(e)

@@ -2,8 +2,15 @@ import React,{useState,useEffect} from 'react'
 import {Link} from "react-router-dom";
 import "./home.css"
 import axios from "axios"
+
+
 const Home = () => {
+
+
+
     const [data,setData] = useState([]);
+
+    const [query,setQuery] = useState("")
 
     useEffect(()=> {
         getEmployees();
@@ -21,6 +28,12 @@ const Home = () => {
 
     return (
         <div style={{marginTop: "150px"}}>
+            <div>
+                <input placeholder="Search by email.." className="search" onChange={event => setQuery(event.target.value)}/>
+            </div>
+            <div>
+
+            </div>
             <table className="styled-table">
                 <thead>
                 <tr>
@@ -33,11 +46,11 @@ const Home = () => {
                 </thead>
 
                 <tbody>
-                    {data && data.map((item,index) => {
+                    {data && data.filter((employee)=> employee.employeeEmail.toLowerCase().includes(query)).map((item,index) => {
                         return (
                             <tr key={index}>
                                 {/*<th scope="row">{index + 1}</th>*/}
-                                <td>{item.id}</td>
+                                <td>{item.employeeID}</td>
                                 <td>{item.employeeFirstName}</td>
                                 <td>{item.employeeLastName}</td>
                                 <td>{item.employeeEmail}</td>

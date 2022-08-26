@@ -23,7 +23,8 @@ const Header = () => {
    },[])
     return (
         <div className="header">
-            <p className="logo"> Employee Management System </p>
+            <p className="logo"> Employee</p>
+            <p className="logo2">Point</p>
             <div className="header-right">
                 <Link to="/">
                     <p className={`${activeTab === "Home" ? "active" : ""}`} onClick={()=> setActiveTab("Home")}> Home</p>

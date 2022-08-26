@@ -1,6 +1,6 @@
 .header {
     overflow: hidden;
-    background-color: #f1f1f1;
+    background-color: #eeeee8;
 }
 
 .header p {
@@ -17,17 +17,25 @@
 .header p.logo{
     font-size: 25px;
     font-weight: bold;
-    color: #5c5239;
+    color: black;
+}
+.header p.logo2{
+    font-size: 25px;
+    font-weight: bold;
+    color: hotpink;
 }
 
 .header p:hover{
-    background-color: #add;
-    color: #5d6770;
+    background-color: hotpink;
+    color: black;
+
 }
 
 .header p.active {
-    background-color: #917c46;
-    color: white;
+    /*background-color: hotpink;*/
+    color: black;
+    text-decoration: underline hotpink 50% ;
+
 }
 
 .header-right {
