@@ -27,13 +27,12 @@ const Home = () => {
     console.log("data=>", data);
 
     return (
+
         <div style={{marginTop: "150px"}}>
             <div>
-                <input placeholder="Search by email.." className="search" onChange={event => setQuery(event.target.value)}/>
+                <input placeholder="Search by email..." className="search" onChange={event => setQuery(event.target.value)}/>
             </div>
-            <div>
 
-            </div>
             <table className="styled-table">
                 <thead>
                 <tr>

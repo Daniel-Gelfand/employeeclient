@@ -16,13 +16,9 @@ const AddEdit = () => {
     const [state,setState] = useState(initialState);
     const { firstName : employeeFirstName  , lastName: employeeLastName ,email: employeeEmail } = initialState;
 
-
-
     const [filteredData,setFilteredData] = useState(state);
     const handleSearch = (event) =>{
     }
-
-
 
     const {email} = useParams();
 
@@ -45,10 +41,10 @@ const AddEdit = () => {
         // }
         try{
             const response = await axios.get(`http://localhost:8080/employee/${email}`)
+            // const response = await fetch(`http://localhost:8080/employee/${email}`)
             console.log("response.data[1]= ",response.data)
             if (response.data == '200'){
                 setState({...response.data[0]})
-
             }
         }
         catch (e){
@@ -108,7 +104,6 @@ const AddEdit = () => {
             else{
                 toast.error(JSON.stringify(response.data.message));
             }
-
         }
         catch (e){
             toast.error(e.message);
