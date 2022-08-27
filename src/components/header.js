@@ -6,25 +6,32 @@ import "./header.css"
 
 const Header = () => {
 
+    /*
+        Reload tabs when click...
+     */
     const [activeTab,setActiveTab] = useState("Home");
 
     const location = useLocation();
+
+    /*
+        Reload tabs when change in pathname...
+     */
    useEffect(()=> {
        if (location.pathname === "/"){
            setActiveTab("Home");
        }
        else if (location.pathname === "/add"){
-           setActiveTab("AddUser");
+           setActiveTab("AddEmployee");
        }
        else if (location.pathname === "/about"){
            setActiveTab("About");
        }
 
-   },[])
+   },[location.pathname])
     return (
         <div className="header">
-            <p className="logo"> Employee</p>
-            <p className="logo2">Point</p>
+            <p className="logo"> EMPLOYEE</p>
+            <p className="logo2">POINT</p>
             <div className="header-right">
                 <Link to="/">
                     <p className={`${activeTab === "Home" ? "active" : ""}`} onClick={()=> setActiveTab("Home")}> Home</p>

@@ -5,7 +5,7 @@ import "./addEdit.css"
 import {toast} from "react-toastify";
 
 
-const initialState = {
+const initialEmployee = {
     employeeFirstName: null,
     employeeLastName: null,
     employeeEmail:null
@@ -13,18 +13,14 @@ const initialState = {
 
 const AddEdit = () => {
 
-    const [state,setState] = useState(initialState);
-    const { firstName : employeeFirstName  , lastName: employeeLastName ,email: employeeEmail } = initialState;
-
-    const [filteredData,setFilteredData] = useState(state);
-    const handleSearch = (event) =>{
-    }
+    const [employeeDetails,setEmployeeDetails] = useState(initialEmployee);
+    const { firstName : employeeFirstName  , lastName: employeeLastName ,email: employeeEmail } = initialEmployee;
 
     const {email} = useParams();
 
     const navigate = useNavigate();
 
-    //TODO : search button ?
+
     useEffect(()=> {
         if (email){
             getSingleUserByEmail(email);
@@ -32,19 +28,13 @@ const AddEdit = () => {
     },[email])
 
     const getSingleUserByEmail = async (email) => {
-        // const response = await axios.get(`http://localhost:8080/employee/${email}`)
-        // console.log("response.data[1]= ",response.data[1])
-        // console.log("response.data[1]= ",response.data[0])
-        // if (response.data == '200'){
-        //     setState({...response.data[0]})
-        //
-        // }
+
         try{
             const response = await axios.get(`http://localhost:8080/employee/${email}`)
             // const response = await fetch(`http://localhost:8080/employee/${email}`)
             console.log("response.data[1]= ",response.data)
             if (response.data == '200'){
-                setState({...response.data[0]})
+                setEmployeeDetails({...response.data[0]})
             }
         }
         catch (e){
@@ -52,29 +42,28 @@ const AddEdit = () => {
         }
     }
 
-
     const handleInputChange = (e) => {
         let {name,value} = e.target;
-        setState({...state,[name]:value })
+        setEmployeeDetails({...employeeDetails,[name]:value })
     }
 
     const handleSubmit = (e) => {
-        console.log("firstname = " ,state.employeeFirstName)
-        console.log("lastname = " ,state.employeeLastName)
-        console.log("email = " ,state.employeeEmail)
+        console.log("firstname = " ,employeeDetails.employeeFirstName)
+        console.log("lastname = " ,employeeDetails.employeeLastName)
+        console.log("email = " ,employeeDetails.employeeEmail)
         e.preventDefault();
-        if (state.employeeFirstName == null || state.employeeLastName == null || state.employeeEmail == null){
+        if (employeeDetails.employeeFirstName == null || employeeDetails.employeeLastName == null || employeeDetails.employeeEmail == null){
             toast.error("Please provide value into each input fields")
         }
         else {
             if (!email){
                 console.log("addEmployee Was entered")
 
-                addEmployee(state);
+                addEmployee(employeeDetails);
             }
             else{
                 console.log("updateEmployee Was entered")
-                updateEmployee(state,email);
+                updateEmployee(employeeDetails,email);
             }
             setTimeout(()=> navigate("/"),500);
         }
@@ -128,13 +117,9 @@ const AddEdit = () => {
 
     }
 
-
-
-
-
     return (
         <div style={{marginTop: "100px"}}>
-            <form style={{margin : "auto",padding :"15px",maxWidth: "400px",alignContent:"center"}} onSubmit={handleSubmit}>
+            <form style={{margin : "auto",padding :"15px",maxWidth: "400px",alignContent:"center",fontWeight:"bold"}} onSubmit={handleSubmit}>
                 <label htmlFor="employeeFirstName">First Name</label>
                 <input type="text" id="employeeFirstName" name="employeeFirstName" placeholder="Enter Name..." onChange={handleInputChange} value={employeeFirstName} required={true}/>
                 <label htmlFor="employeeLastName">Last Name</label>
